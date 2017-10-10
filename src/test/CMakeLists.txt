@@ -6,22 +6,13 @@
 ## Copyright (c) 2016 Oak Ridge National Laboratory, UT-Battelle, LLC.
 ##---------------------------------------------------------------------------##
 
-# Include source/binary so that downstream modules can use the .mod files
-INCLUDE_DIRECTORIES(${CMAKE_PROJECT_SOURCE_DIR})
-INCLUDE_DIRECTORIES(${CMAKE_PROJECT_BINARY_DIR})
-
-# Generate SWIG module
-MAKE_SWIG(MODULE commonlib
-  SOURCE commonlib.i
-  EXTRASRC timerlib.f90
-           shuffle.cc)
-SET(LIBNAME ${SWIG_MODULE_commonlib_REAL_NAME})
+MESSAGE(STATUS "Built libs: ${BUILT_LIBS}")
 
 # Create test executable
 FOREACH(TESTNAME timer shuffle)
-  ADD_EXECUTABLE(${TESTNAME}_test.exe ${TESTNAME}_test.f90)
-  TARGET_LINK_LIBRARIES(${TESTNAME}_test.exe ${LIBNAME})
-  ADD_TEST(NAME ${TESTNAME}_test COMMAND ${TESTNAME}_test.exe)
+  ADD_EXECUTABLE(test_${TESTNAME}.exe test_${TESTNAME}.f90)
+  TARGET_LINK_LIBRARIES(test_${TESTNAME}.exe ${BUILT_LIBS})
+  ADD_TEST(NAME test_${TESTNAME} COMMAND test_${TESTNAME}.exe)
 ENDFOREACH()
 
 ##---------------------------------------------------------------------------##

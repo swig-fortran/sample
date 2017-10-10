@@ -18,7 +18,7 @@ contains
 subroutine test_shuffle()
     use ISO_FORTRAN_ENV
     use, intrinsic :: ISO_C_BINDING
-    use commonlib, only : init_rng, shuffle
+    use algorithm, only : init_rng, shuffle
     implicit none
     integer :: i
     integer(C_INT), dimension(6) :: test_data = (/ -1, 1, 3, 3, 5, 7 /)

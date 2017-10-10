@@ -19,9 +19,7 @@ FIND_PACKAGE(SWIG REQUIRED)
 LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 INCLUDE(SwigModules)
 
-# SET(CMAKE_CXX_FLAGS "-std=c++11")
-
-ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/common)
+ADD_SUBDIRECTORY(src)
 
 ##---------------------------------------------------------------------------##
 ## end of algorithm/CMakeLists.txt

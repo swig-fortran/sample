@@ -1,6 +1,6 @@
 //---------------------------------*-C++-*-----------------------------------//
 /*!
- * \file   common/shuffle.cc
+ * \file   src/algorithm.cc
  * \author Seth R Johnson
  * \date   Tue Oct 10 12:19:21 2017
  * \brief  shuffle class definitions.
@@ -50,5 +50,5 @@ template void shuffle<double>(double*, int);
 template void shuffle<int>(int*, int);
 
 //---------------------------------------------------------------------------//
-// end of common/shuffle.cc
+// end of src/algorithm.cc
 //---------------------------------------------------------------------------//
