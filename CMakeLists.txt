@@ -19,7 +19,11 @@ FIND_PACKAGE(SWIG REQUIRED)
 LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 INCLUDE(SwigModules)
 
+# Enable C-like preprocessing
+SET(CMAKE_Fortran_FLAGS "-cpp ${CMAKE_Fortran_FLAGS}")
+
 ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(perf)
 
 ##---------------------------------------------------------------------------##
 ## end of algorithm/CMakeLists.txt
