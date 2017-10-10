@@ -172,7 +172,9 @@ function(MAKE_SWIG)
   endif()
 
   # Link against other dependent libraries
-  swig_link_libraries(${PARSE_MODULE} ${PARSE_DEPLIBS})
+  IF (PARSE_DEPLIBS)
+    add_dependencies(${BUILT_LIBRARY} ${PARSE_DEPLIBS})
+  ENDIF()
 
   # Add intra-module dependencies
   foreach(DEPMODULE ${PARSE_DEPMODULES})
@@ -196,11 +198,6 @@ function(MAKE_SWIG)
   set_target_properties(${BUILT_LIBRARY} PROPERTIES
     INCLUDE_DIRECTORIES "${INCL_DIR}"
     COMPILE_FLAGS "${SWIG_CXX_FLAGS}")
-  if (PARSE_LANGUAGE STREQUAL "FORTRAN")
-    set_target_properties(${BUILT_LIBRARY} PROPERTIES
-      TYPE "SHARED_LIBRARY")
-  endif()
-
 
   message(STATUS "Include directories on target ${PARSE_MODULE}: ${INCL_DIR}")
 

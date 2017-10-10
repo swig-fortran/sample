@@ -3,7 +3,7 @@
 ## Author: Seth R Johnson
 ## Date  : Thu Dec 01 13:27:05 2016
 ## Copyright (c) 2016 Oak Ridge National Laboratory, UT-Battelle, LLC.
-# cd ~/_code/_build/devswig-paper
+# cd ~/_code/_build/swig-fortran-sample
 # cmake -C /Users/s3j/_code/swig-fortran-sample/cmake/config.cmake \
 #   ~/_code/swig-fortran-sample
 ##---------------------------------------------------------------------------##
