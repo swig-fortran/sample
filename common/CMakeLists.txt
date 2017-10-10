@@ -10,19 +10,19 @@
 INCLUDE_DIRECTORIES(${CMAKE_PROJECT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${CMAKE_PROJECT_BINARY_DIR})
 
-# Generate fortran library
-ADD_LIBRARY(commonlib
-  timerlib.f90
-  )
+# Generate SWIG module
+MAKE_SWIG(MODULE commonlib
+  SOURCE commonlib.i
+  EXTRASRC timerlib.f90
+           shuffle.cc)
+SET(LIBNAME ${SWIG_MODULE_commonlib_REAL_NAME})
 
 # Create test executable
-ADD_EXECUTABLE(timer_test.exe timer_test.f90)
-
-# It depends on the compiled fortran module
-TARGET_LINK_LIBRARIES(timer_test.exe commonlib)
-
-# Create test
-ADD_TEST(NAME timer_test COMMAND timer_test.exe)
+FOREACH(TESTNAME timer shuffle)
+  ADD_EXECUTABLE(${TESTNAME}_test.exe ${TESTNAME}_test.f90)
+  TARGET_LINK_LIBRARIES(${TESTNAME}_test.exe ${LIBNAME})
+  ADD_TEST(NAME ${TESTNAME}_test COMMAND ${TESTNAME}_test.exe)
+ENDFOREACH()
 
 ##---------------------------------------------------------------------------##
 ## end of common/CMakeLists.txt
