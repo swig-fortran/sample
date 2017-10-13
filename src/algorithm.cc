@@ -8,7 +8,7 @@
  */
 //---------------------------------------------------------------------------//
 
-#include "shuffle.hh"
+#include "algorithm.hh"
 
 #include <cassert>
 #include <random>
