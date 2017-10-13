@@ -1,4 +1,8 @@
-! Binary search subroutine, Brainerd, p141
+! Example algorithms from
+! W. S. Brainerd, Guide to Fortran 2008 Programming. Springer, 2nd ed., 2015.
+!
+! Binary search subroutine: p.141
+!
 module brainerd
 contains
 subroutine binary_search(lost_card, card_number, found)

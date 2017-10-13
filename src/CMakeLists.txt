@@ -15,6 +15,7 @@ MAKE_SWIG(MODULE algorithm
   EXTRASRC algorithm.cc)
 
 ADD_LIBRARY(futils
+  brainerd.f90
   timerlib.f90)
 
 SET(BUILT_LIBS futils ${SWIG_MODULE_algorithm_REAL_NAME})
