@@ -14,11 +14,16 @@ MAKE_SWIG(MODULE algorithm
   SOURCE algorithm.i
   EXTRASRC algorithm.cc)
 
+MAKE_SWIG(MODULE formatrix
+  SOURCE formatrix.i
+  EXTRASRC matrix.cc)
+
 ADD_LIBRARY(futils
   brainerd.f90
   timerlib.f90)
 
-SET(BUILT_LIBS futils ${SWIG_MODULE_algorithm_REAL_NAME})
+SET(BUILT_LIBS futils ${SWIG_MODULE_algorithm_REAL_NAME}
+   ${SWIG_MODULE_formatrix_REAL_NAME})
 
 ADD_SUBDIRECTORY(test)
 

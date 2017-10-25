@@ -6,11 +6,10 @@
 ## Copyright (c) 2016 Oak Ridge National Laboratory, UT-Battelle, LLC.
 ##---------------------------------------------------------------------------##
 
-# Create test executable
-FOREACH(TESTNAME timer shuffle)
-  ADD_EXECUTABLE(test_${TESTNAME}.exe test_${TESTNAME}.f90)
-  TARGET_LINK_LIBRARIES(test_${TESTNAME}.exe ${BUILT_LIBS})
-  ADD_TEST(NAME test_${TESTNAME} COMMAND test_${TESTNAME}.exe)
+# Create executable
+FOREACH(PERFNAME sort search formatrix)
+  ADD_EXECUTABLE(perf_${PERFNAME}.exe perf_${perfNAME}.f90)
+  TARGET_LINK_LIBRARIES(perf_${PERFNAME}.exe ${BUILT_LIBS})
 ENDFOREACH()
 
 ##---------------------------------------------------------------------------##

@@ -1,11 +1,10 @@
 !-----------------------------------------------------------------------------!
-! \file   common/shuffle_test.f90
+! \file   perf/perf_sort.f90
 ! \author Seth R Johnson
-! \date   Tue Oct 10 11:58:17 2017
-! \brief  shuffle test
+! \date   Tue Oct 17 15:38:17 2017
+! \brief  perf_sort module
 ! \note   Copyright (c) 2017 Oak Ridge National Laboratory, UT-Battelle, LLC.
 !-----------------------------------------------------------------------------!
-
 program main
 
     use ISO_FORTRAN_ENV
@@ -43,6 +42,7 @@ end subroutine
 
 end program
 
+
 !-----------------------------------------------------------------------------!
-! end of common/shuffle_test.f90
+! end of perf/perf_sort.f90
 !-----------------------------------------------------------------------------!

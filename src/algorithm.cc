@@ -10,7 +10,7 @@
 
 #include "algorithm.hh"
 
-#include <cassert>
+#include <stdexcept>
 #include <random>
 #include <algorithm>
 
@@ -38,7 +38,8 @@ void init_rng(int seed)
 template<class T>
 void shuffle(T* arr, int count)
 {
-    assert(g_generator);
+    if (!g_generator)
+        throw std::logic_error("RNG was not initialized");
     std::shuffle(arr, arr + count, *g_generator);
 }
 

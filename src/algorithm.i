@@ -13,6 +13,27 @@
 #include "algorithm.hh"
 %}
 
+%include <std_except.i>
+
+%exception {
+    // Make sure no unhandled exceptions exist before performing a new action
+    swig::fortran_check_unhandled_exception();
+    try
+    {
+        // Attempt the wrapped function call
+        $action
+    }
+    catch (const std::exception& e)
+    {
+        // Store a C++ exception
+        SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+    catch (...)
+    {
+        SWIG_exception(SWIG_UnknownError, "An unknown exception occurred");
+    }
+}
+
 %include <typemaps.i>
 
 %define TEMPLATE_ALGORITHMS(TYPE)
