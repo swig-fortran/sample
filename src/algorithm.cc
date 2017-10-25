@@ -36,19 +36,19 @@ void init_rng(int seed)
  * \brief Shuffle elements in the array using the global rng
  */
 template<class T>
-void shuffle(T* arr, int count)
+void shuffle(std::pair<T*, std::size_t> view)
 {
     if (!g_generator)
         throw std::logic_error("RNG was not initialized");
-    std::shuffle(arr, arr + count, *g_generator);
+    std::shuffle(view.first, view.first + view.second, *g_generator);
 }
 
 //---------------------------------------------------------------------------//
 // EXPLICIT INSTANTIATIONS
 //---------------------------------------------------------------------------//
-template void shuffle<float>(float*, int);
-template void shuffle<double>(double*, int);
-template void shuffle<int>(int*, int);
+template void shuffle<float>( std::pair<float*,  std::size_t>);
+template void shuffle<double>(std::pair<double*, std::size_t>);
+template void shuffle<int>(   std::pair<int*,    std::size_t>);
 
 //---------------------------------------------------------------------------//
 // end of src/algorithm.cc

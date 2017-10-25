@@ -23,7 +23,6 @@ INCLUDE(SwigModules)
 SET(CMAKE_Fortran_FLAGS "-cpp ${CMAKE_Fortran_FLAGS}")
 
 ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(perf)
 
 ##---------------------------------------------------------------------------##
 ## end of algorithm/CMakeLists.txt

@@ -5,38 +5,23 @@
 ! \brief  perf_sort module
 ! \note   Copyright (c) 2017 Oak Ridge National Laboratory, UT-Battelle, LLC.
 !-----------------------------------------------------------------------------!
+
 program main
-
     use ISO_FORTRAN_ENV
+    use algorithm, only : init_rng
     implicit none
+    integer :: i
 
-    call test_shuffle()
+    call init_rng(123)
+    do i = 1, 20
+        call perf_sort()
+    enddo
 contains
 
 !-----------------------------------------------------------------------------!
-subroutine test_shuffle()
+subroutine perf_sort()
     use ISO_FORTRAN_ENV
     use, intrinsic :: ISO_C_BINDING
-    use algorithm, only : init_rng, shuffle, ierr, serr
-    implicit none
-    integer :: i
-    integer(C_INT), dimension(6) :: test_data = (/ -1, 1, 3, 3, 5, 7 /)
-    character(len=*), parameter :: list_fmt = "(*(i4,"",""))"
-
-    ! Call before initialize to show error testing
-    call shuffle(test_data)
-    if (ierr /= 0) then
-        write(*,*) "Error", ierr, ": ", trim(serr)
-        ! Instead of calling "stop", clear the error
-        ierr = 0
-    endif
-
-    call init_rng(123)
-
-    do i = 1,3
-        call shuffle(test_data)
-        write (0,list_fmt) test_data
-    enddo
 end subroutine
 !-----------------------------------------------------------------------------!
 

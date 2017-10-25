@@ -37,8 +37,8 @@
 %include <typemaps.i>
 
 %define TEMPLATE_ALGORITHMS(TYPE)
-    %apply (SWIGTYPE* ARRAY, int SIZE) { (      TYPE* arr, int count),
-                                         (const TYPE* arr, int count) }
+    // Enable pointer translation support
+    %fort_view_typemap(TYPE)
 
     %template(shuffle)     shuffle< TYPE >;
     %template(sort)        sort< TYPE >;

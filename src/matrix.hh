@@ -1,10 +1,14 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <utility>
 #include <vector>
 
 class Matrix {
 public:
+    typedef std::pair<const int*, std::size_t> const_int_view;
+    typedef std::pair<const double*, std::size_t> const_dbl_view;
+
     Matrix(int nx, int ny);
 
     // Tester functions
@@ -36,28 +40,28 @@ public:
     // Full row access
     // =============================================
     //! Get row columns
-    const int* get_columns(int row) const {
-        return &col_inds[row_ptrs[row]];
+    const_int_view get_columns(int row) const {
+        return {&col_inds[row_ptrs[row]], row_nnz(row)};
     }
     //! Get row values
-    const double* get_values(int row) const {
-        return &values[row_ptrs[row]];
+    const_dbl_view get_values(int row) const {
+        return {&values[row_ptrs[row]], row_nnz(row)};
     }
 
     // =============================================
     // Full matrix access
     // =============================================
     // Get row pointers (array 1 of CRS)
-    const int* get_row_ptrs() const {
-        return row_ptrs.data();
+    const_int_view get_row_ptrs() const {
+        return {row_ptrs.data(), row_ptrs.size()};
     }
     // Get column indices (array 2 of CRS)
-    const int* get_col_inds() const {
-        return col_inds.data();
+    const_int_view get_col_inds() const {
+        return {col_inds.data(), row_ptrs.size()};
     }
     // Get values (array 3 of CRS)
-    const double* get_values() const {
-        return values.data();
+    const_dbl_view get_values() const {
+        return {values.data(), row_ptrs.size()};
     }
 
 private:

@@ -3,10 +3,10 @@ program main
     use ISO_FORTRAN_ENV
     implicit none
 
-    call test_perf()
+    call perf_formatrix()
 contains
 
-subroutine test_perf()
+subroutine perf_formatrix()
     use ISO_FORTRAN_ENV
     use, intrinsic :: ISO_C_BINDING
     use timerlib, only : Timer

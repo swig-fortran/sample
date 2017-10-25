@@ -8,7 +8,7 @@
 
 # Create executable
 FOREACH(PERFNAME sort search formatrix)
-  ADD_EXECUTABLE(perf_${PERFNAME}.exe perf_${perfNAME}.f90)
+  ADD_EXECUTABLE(perf_${PERFNAME}.exe perf_${PERFNAME}.f90)
   TARGET_LINK_LIBRARIES(perf_${PERFNAME}.exe ${BUILT_LIBS})
 ENDFOREACH()
 
