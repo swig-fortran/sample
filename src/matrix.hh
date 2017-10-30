@@ -57,11 +57,11 @@ public:
     }
     // Get column indices (array 2 of CRS)
     const_int_view get_col_inds() const {
-        return {col_inds.data(), row_ptrs.size()};
+        return {col_inds.data(), col_inds.size()};
     }
     // Get values (array 3 of CRS)
     const_dbl_view get_values() const {
-        return {values.data(), row_ptrs.size()};
+        return {values.data(), values.size()};
     }
 
 private:
