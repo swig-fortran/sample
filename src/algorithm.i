@@ -38,7 +38,7 @@
 
 %define TEMPLATE_ALGORITHMS(TYPE)
     // Enable pointer translation support
-    %fort_view_typemap(TYPE)
+    %fortran_view(TYPE)
 
     %template(shuffle)     shuffle< TYPE >;
     %template(sort)        sort< TYPE >;

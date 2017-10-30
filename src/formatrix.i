@@ -6,7 +6,7 @@
 
 %include <typemaps.i>
 
-%fort_view_typemap(int)
-%fort_view_typemap(double)
+%fortran_view(int)
+%fortran_view(double)
 
 %include "matrix.hh"
