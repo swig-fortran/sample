@@ -48,6 +48,11 @@ public:
         return {&values[row_ptrs[row]], row_nnz(row)};
     }
 
+    //! Get row columns
+    const int* get_columns_ptr(int row) const {
+        return &col_inds[row_ptrs[row]];
+    }
+
     // =============================================
     // Full matrix access
     // =============================================

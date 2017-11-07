@@ -14,6 +14,7 @@ subroutine perf_formatrix()
     implicit none
     integer :: i, j, k
     integer :: nx, ny, n, nnz, num_repeats
+    integer :: outer_rep, num_outer_repeats
 
     type(Timer) :: t
     type(Matrix) :: A
@@ -27,6 +28,7 @@ subroutine perf_formatrix()
     nx = 400
     ny = 400
     num_repeats = 300
+    num_outer_repeats = 2
 
     n = nx*ny
 
@@ -34,7 +36,7 @@ subroutine perf_formatrix()
     allocate(x(n))
     allocate(b(n))
 
-
+  do outer_rep = 1, num_outer_repeats
     ! Fine grained
     call t%start()
     do k = 1, num_repeats
@@ -49,17 +51,31 @@ subroutine perf_formatrix()
     call t%stop()
     write(0, '(A, F10.3)') "Loop (fine)  :", t%walltime()
 
+    ! Medium grained (using raw pointer return and 2 swig calls)
+    call t%reset()
+    call t%start()
+    do k = 1, num_repeats
+        do i = 1, n
+            cols => A%get_columns_ptr(i-1)
+            vals => A%get_values(i-1)
+
+            do j = 1, size(cols)
+                b(i) = b(i) + vals(j) * x(cols(j)+1)
+            end do
+        end do
+    end do
+    call t%stop()
+    write(0, '(A, F10.3)') "Loop (medium 2xfortran):", t%walltime()
+
     ! Medium grained
     call t%reset()
     call t%start()
     do k = 1, num_repeats
         do i = 1, n
-            nnz = A%row_nnz(i-1)
-
             cols => A%get_columns(i-1)
             vals => A%get_values(i-1)
 
-            do j = 1, nnz
+            do j = 1, size(cols)
                 b(i) = b(i) + vals(j) * x(cols(j)+1)
             end do
         end do
@@ -83,7 +99,7 @@ subroutine perf_formatrix()
     end do
     call t%stop()
     write(0, '(A, F10.3)') "Loop (coarse):", t%walltime()
-
+ enddo
     call A%release()
 end subroutine
 
