@@ -6,7 +6,7 @@
 ##---------------------------------------------------------------------------##
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
-PROJECT(swig-fortran-sample CXX Fortran)
+PROJECT(swig-fortran-sample C CXX Fortran)
 
 # Require C++11
 SET(CMAKE_CXX_STANDARD 11)
@@ -14,9 +14,12 @@ SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ENABLE_TESTING()
 
+LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
+FIND_PACKAGE(Silo)
+
 # SWIG setup
 FIND_PACKAGE(SWIG REQUIRED)
-LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 INCLUDE(SwigModules)
 
 # Enable C-like preprocessing

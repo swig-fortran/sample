@@ -26,6 +26,14 @@ MAKE_SWIG(MODULE formatrix
 MAKE_SWIG(MODULE rng
   SOURCE rng.i)
 
+IF (SILO_FOUND)
+  message(STATUS "Creating SILO wrappers")
+  INCLUDE_DIRECTORIES(${SILO_INCLUDE_DIRS})
+  MAKE_SWIG(C MODULE silo
+    SOURCE silo.i
+    DEPLIBS ${SILO_LIBRARIES})
+ENDIF()
+
 ADD_LIBRARY(futils
   brainerd.f90
   timerlib.f90)
