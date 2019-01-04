@@ -57,11 +57,12 @@ subroutine fill(x)
     use rng, only : init_rng, shuffle
 
     integer(c_int), dimension(:) :: x
+    integer :: j
 
     call init_rng(123)
 
-    do i = 1, size(x)
-      x(i) = i
+    do j = 1, size(x)
+      x(j) = j
     end do
 
     call shuffle(x)
