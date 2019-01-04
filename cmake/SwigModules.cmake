@@ -206,11 +206,18 @@ function(MAKE_SWIG)
               ${SWIG_FORTRAN_GENERATED_SRC}
               ${swig_wrapper_src})
   else()
+    message(STATUS "${SWIG_FORTRAN_GENERATED_SRC}")
     swig_add_library(${PARSE_MODULE}
       LANGUAGE ${PARSE_LANGUAGE}
       TYPE ${SWIG_LIBRARY_TYPE}
-      SOURCES ${SRC_FILE} ${SWIG_FORTRAN_GENERATED_SRC} ${PARSE_EXTRASRC})
+      SOURCES ${SRC_FILE} ${PARSE_EXTRASRC})
   endif()
+
+  IF(PARSE_LANGUAGE STREQUAL "FORTRAN")
+    set_source_files_properties(${SWIG_FORTRAN_GENERATED_SRC} PROPERTIES
+      LANGUAGE "Fortran")
+  ENDIF()
+
 
   # Restore original SWIG flags
   SET(CMAKE_SWIG_FLAGS _ORIG_CMAKE_SWIG_FLAGS)

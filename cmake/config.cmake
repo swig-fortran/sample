@@ -5,7 +5,7 @@
 ## Copyright (c) 2016 Oak Ridge National Laboratory, UT-Battelle, LLC.
 # cd /rnsdhpc/code/build/swig-fortran-sample
 # cmake -C /rnsdhpc/code/src/cmake/config.cmake \
-#   ~/_code/swig-fortran-sample
+#   /rnsdhpc/code/src/swig-fortran-sample
 ##---------------------------------------------------------------------------##
 
 SET(CMAKE_CXX_COMPILER "/opt/local/bin/g++" CACHE PATH "")
