@@ -32,6 +32,7 @@ ADD_LIBRARY(futils
 
 SET(BUILT_LIBS futils
   ${SWIG_MODULE_utils_REAL_NAME}
+  ${SWIG_MODULE_rng_REAL_NAME}
   ${SWIG_MODULE_algorithm_REAL_NAME}
   ${SWIG_MODULE_formatrix_REAL_NAME})
 
