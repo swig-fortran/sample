@@ -32,7 +32,7 @@ subroutine perf_formatrix()
 
     n = nx*ny
 
-    call A%create(nx, ny)
+    A = Matrix(nx, ny)
     allocate(x(n))
     allocate(b(n))
 
