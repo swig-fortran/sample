@@ -17,6 +17,7 @@ contains
 !-----------------------------------------------------------------------------!
 subroutine test_timer()
     use ISO_FORTRAN_ENV
+    use utils, only : msleep
     use timerlib, only : Timer
     implicit none
     type(Timer) :: t
@@ -25,12 +26,12 @@ subroutine test_timer()
     write(0, *) "Time at creation:", t%walltime(), ", cpu time ", t%cputime()
     
     call t%start()
-    call sleep(1)
+    call msleep(1000)
     call t%stop()
     write(0, *) "Time after sleep:", t%walltime(), ", cpu time ", t%cputime()
     
     call t%start()
-    call sleep(2)
+    call msleep(2500)
     call t%stop()
     write(0, *) "Time after sleep:", t%walltime(), ", cpu time ", t%cputime()
 

@@ -13,6 +13,9 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 # Generate SWIG module
+MAKE_SWIG(MODULE utils
+  SOURCE utils.i)
+
 MAKE_SWIG(MODULE algorithm
   SOURCE algorithm.i)
 
@@ -20,12 +23,17 @@ MAKE_SWIG(MODULE formatrix
   SOURCE formatrix.i
   EXTRASRC matrix.cc)
 
+MAKE_SWIG(MODULE rng
+  SOURCE rng.i)
+
 ADD_LIBRARY(futils
   brainerd.f90
   timerlib.f90)
 
-SET(BUILT_LIBS futils ${SWIG_MODULE_algorithm_REAL_NAME}
-   ${SWIG_MODULE_formatrix_REAL_NAME})
+SET(BUILT_LIBS futils
+  ${SWIG_MODULE_utils_REAL_NAME}
+  ${SWIG_MODULE_algorithm_REAL_NAME}
+  ${SWIG_MODULE_formatrix_REAL_NAME})
 
 ADD_SUBDIRECTORY(test)
 ADD_SUBDIRECTORY(perf)
