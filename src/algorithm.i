@@ -1,57 +1,35 @@
-//---------------------------------*-SWIG-*----------------------------------//
-/*!
- * \file   algorithms/algorithm.i
- * \author Seth R Johnson
- * \date   Tue Dec 06 11:21:44 2016
- * \note   Copyright (c) 2016 Oak Ridge National Laboratory, UT-Battelle, LLC.
- */
-//---------------------------------------------------------------------------//
-
 %module algorithm
 
 %{
-#include "algorithm.hh"
+#include <algorithm>
+#include <numeric>
 %}
-
-%include <std_except.i>
-
-%exception {
-    // Make sure no unhandled exceptions exist before performing a new action
-    swig::fortran_check_unhandled_exception();
-    try
-    {
-        // Attempt the wrapped function call
-        $action
-    }
-    catch (const std::exception& e)
-    {
-        // Store a C++ exception
-        SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-    catch (...)
-    {
-        SWIG_exception(SWIG_UnknownError, "An unknown exception occurred");
-    }
-}
 
 %include <typemaps.i>
 
-%define TEMPLATE_ALGORITHMS(TYPE)
-    // Enable pointer translation support
-    %fortran_view(TYPE)
+%apply (const SWIGTYPE *DATA, size_t SIZE) { (int *DATA, size_t SIZE) };
+%apply (const SWIGTYPE *DATA, size_t SIZE) { (const double *DATA, size_t SIZE) };
 
-    %template(shuffle)     shuffle< TYPE >;
-    %template(sort)        sort< TYPE >;
-    %template(reverse)     reverse< TYPE >;
-    %template(find_sorted) find_sorted< TYPE >;
-%enddef
+%inline %{
+template<class T>
+void sort(T *DATA, size_t SIZE) {
+  std::sort(DATA, DATA + SIZE);
+}
 
-%include "algorithm.hh"
+template<class T>
+T cpp_sum(const T *DATA, size_t SIZE) {
+  return std::accumulate(DATA, DATA + SIZE, T(0));
+}
 
-TEMPLATE_ALGORITHMS(int)
-TEMPLATE_ALGORITHMS(float)
-TEMPLATE_ALGORITHMS(double)
 
-//---------------------------------------------------------------------------//
-// end of algorithms/algorithm.i
-//---------------------------------------------------------------------------//
+template<class T>
+int find_sorted(const T *DATA, size_t SIZE, T value) {
+  int result = std::lower_bound(DATA, DATA + SIZE, value) - DATA;
+  if (result == SIZE || DATA[result] != value) return 0;
+  return result + 1;
+}
+%}
+
+%template(sort)        sort<int>;
+%template(cpp_sum)        cpp_sum<double>;
+%template(find_sorted) find_sorted<int>;

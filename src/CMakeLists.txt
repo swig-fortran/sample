@@ -5,14 +5,16 @@
 ## Copyright (c) 2017 Oak Ridge National Laboratory, UT-Battelle, LLC.
 ##---------------------------------------------------------------------------##
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # Include source/binary so that downstream modules can use the .mod files
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 # Generate SWIG module
 MAKE_SWIG(MODULE algorithm
-  SOURCE algorithm.i
-  EXTRASRC algorithm.cc)
+  SOURCE algorithm.i)
 
 MAKE_SWIG(MODULE formatrix
   SOURCE formatrix.i
