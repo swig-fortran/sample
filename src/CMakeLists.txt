@@ -28,7 +28,9 @@ MAKE_SWIG(MODULE rng
 
 ADD_LIBRARY(futils
   brainerd.f90
-  timerlib.f90)
+  timerlib.f90
+  qsort.f90
+  )
 
 SET(BUILT_LIBS futils
   ${SWIG_MODULE_utils_REAL_NAME}
