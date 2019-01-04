@@ -31,5 +31,5 @@ int find_sorted(const T *DATA, size_t SIZE, T value) {
 %}
 
 %template(sort)        sort<int>;
-%template(cpp_sum)        cpp_sum<double>;
+%template(cpp_sum)     cpp_sum<double>;
 %template(find_sorted) find_sorted<int>;

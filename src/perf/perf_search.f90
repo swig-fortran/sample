@@ -8,7 +8,7 @@
 
 program main
     use ISO_FORTRAN_ENV
-    use algorithm, only : init_rng
+    use rng, only : init_rng
     implicit none
     integer :: i
 
@@ -22,7 +22,7 @@ contains
 subroutine perf_shuffle()
     use ISO_FORTRAN_ENV
     use, intrinsic :: ISO_C_BINDING
-    use algorithm, only : init_rng, shuffle
+    use rng, only : init_rng, shuffle
     implicit none
     integer :: i
     integer(C_INT), dimension(6) :: test_data = (/ -1, 1, 3, 3, 5, 7 /)

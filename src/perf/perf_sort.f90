@@ -8,7 +8,7 @@
 
 program main
     use ISO_FORTRAN_ENV
-    use algorithm, only : init_rng
+    use rng, only : init_rng
     implicit none
     integer :: i
 
