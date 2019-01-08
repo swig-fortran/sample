@@ -14,40 +14,48 @@ program main
     use qsort
 
     implicit none
-    integer :: i
+    integer :: i, k, n
     integer, parameter :: num_loops = 40
-    integer, parameter :: n = 10000000
+    integer, parameter :: n0 = 10000
+    integer, parameter :: steps = 4
     real(c_double), dimension(:), allocatable :: x
     type(Timer) :: t
 
     call t%create()
 
-    ! Allocate array
-    allocate(x(n))
 
-    ! Fortran version of quick sort
-    do i = 1, num_loops
-        call fill(x)                ! reset array
+    n = n0
+    do k = 1, steps
+        ! Allocate array
+        allocate(x(n))
 
-        call t%start()
-        call quick_sort(x, n)
-        call t%stop()
-    enddo
-    write(0, '(A, F10.3)') "Fortran :", t%walltime() / num_loops
+        ! Fortran version of quick sort
+        do i = 1, num_loops
+            call fill(x)                ! reset array
 
-    call t%reset()
+            call t%start()
+            call quick_sort(x, n)
+            call t%stop()
+        enddo
+        write(0, '(A, I8, F10.5)') "Fortran :", n, t%walltime() / num_loops
 
-    ! Wrapped C++ version of quick sort
-    do i = 1, num_loops
-        call fill(x)                ! reset array
+        call t%reset()
 
-        call t%start()
-        call sort(x)
-        call t%stop()
-    enddo
-    write(0, '(A, F10.3)') "C++     :", t%walltime() / num_loops
+        ! Wrapped C++ version of quick sort
+        do i = 1, num_loops
+            call fill(x)                ! reset array
 
-    deallocate(x)
+            call t%start()
+            call sort(x)
+            call t%stop()
+        enddo
+        write(0, '(A, I8, F10.5)') "C++     :", n, t%walltime() / num_loops
+
+        deallocate(x)
+
+        n = n*10
+    end do
+
 
 contains
 
