@@ -11,12 +11,13 @@ program main
     use, intrinsic :: ISO_C_BINDING
     use timerlib, only : Timer
     use algorithm, only : sort
+    use qsort
 
     implicit none
     integer :: i
     integer, parameter :: num_loops = 40
     integer, parameter :: n = 10000000
-    integer(c_int), dimension(:), allocatable :: x
+    real(c_double), dimension(:), allocatable :: x
     type(Timer) :: t
 
     call t%create()
@@ -51,21 +52,21 @@ program main
 contains
 
 !-----------------------------------------------------------------------------!
-subroutine fill(x)
+subroutine fill(xx)
     use ISO_FORTRAN_ENV
     use, intrinsic :: ISO_C_BINDING
     use rng, only : init_rng, shuffle
 
-    integer(c_int), dimension(:) :: x
+    real(c_double), dimension(:) :: xx
     integer :: j
 
     call init_rng(123)
 
-    do j = 1, size(x)
-      x(j) = j
+    do j = 1, size(xx)
+      xx(j) = j
     end do
 
-    call shuffle(x)
+    call shuffle(xx)
 
 end subroutine
 !-----------------------------------------------------------------------------!
