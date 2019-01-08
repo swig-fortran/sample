@@ -1,7 +1,9 @@
 %module rng
 
 %include <typemaps.i>
-%apply (SWIGTYPE *DATA, size_t SIZE) { (int *DATA, int SIZE) };
+
+%apply (SWIGTYPE *DATA, size_t SIZE) { (int    *DATA, size_t SIZE) };
+%apply (SWIGTYPE *DATA, size_t SIZE) { (double *DATA, size_t SIZE) };
 
 %{
 #include <random>
@@ -16,10 +18,11 @@ void init_rng(int seed) {
 }
 
 template<class T>
-void shuffle(T *DATA, int SIZE) {
+void shuffle(T *DATA, size_t SIZE) {
     std::shuffle(DATA, DATA + SIZE, *g_generator);
 }
 
 %}
 
 %template(shuffle) shuffle<int>;
+%template(shuffle) shuffle<double>;
