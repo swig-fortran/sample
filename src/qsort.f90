@@ -1,3 +1,6 @@
+module qsort
+    use ISO_C_BINDING
+contains
 RECURSIVE SUBROUTINE quick_sort(list, n)
 
 ! Quick sort routine from:
@@ -6,7 +9,7 @@ RECURSIVE SUBROUTINE quick_sort(list, n)
 
 IMPLICIT NONE
 integer n
-REAL, DIMENSION (n), INTENT(IN OUT)  :: list
+REAL(C_DOUBLE), DIMENSION (n), INTENT(IN OUT)  :: list
 
 ! Local variable
 INTEGER :: i
@@ -21,7 +24,7 @@ INTEGER, INTENT(IN) :: left_end, right_end
 
 !     Local variables
 INTEGER             :: i, j, itemp
-REAL                :: reference, temp
+REAL(C_DOUBLE)                :: reference, temp
 INTEGER, PARAMETER  :: max_simple_sort_size = 6
 
 IF (right_end < left_end + max_simple_sort_size) THEN
@@ -70,7 +73,7 @@ INTEGER, INTENT(IN) :: left_end, right_end
 
 !     Local variables
 INTEGER             :: i, j, itemp
-REAL                :: temp
+REAL(C_DOUBLE)                :: temp
 
 DO i = left_end, right_end - 1
   DO j = i+1, right_end
@@ -83,3 +86,5 @@ END DO
 END SUBROUTINE interchange_sort
 
 END SUBROUTINE quick_sort
+
+end module
