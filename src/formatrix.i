@@ -16,5 +16,11 @@
 %typemap("fout") int const *get_columns_ptr
   "call c_f_pointer($1, $result, [self%row_nnz(row)])"
 
+// Overwrite typemap generation to bypass nonnull(self) class pointer check
+// that is quite expensive
+%typemap(in, noblock=1) SWIGTYPE *self, const SWIGTYPE *self {
+  $1 = %static_cast($input->cptr, $1_ltype);
+}
+
 
 %include "matrix.hh"

@@ -28,7 +28,7 @@ subroutine perf_formatrix()
     nx = 400
     ny = 400
     num_repeats = 300
-    num_outer_repeats = 2
+    num_outer_repeats = 1
 
     n = nx*ny
 
