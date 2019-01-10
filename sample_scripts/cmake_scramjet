@@ -1,0 +1,42 @@
+#!/bin/bash
+EXTRA_ARGS=$@
+
+rm -f  CMakeCache.txt
+rm -rf CMakeFiles/
+rm -f  build.ninja
+rm -f  rules.ninja
+
+# LTO_FLAG="-flto"
+
+SWIG_DIR="$HOME/code/swig"
+ARGS=(
+    -D CMAKE_BUILD_TYPE=Release
+
+    -D CMAKE_AR="$(which gcc-ar)"
+    -D CMAKE_CXX_ARCHIVE_CREATE="<CMAKE_AR> qcs --plugin $(gcc --print-file-name=liblto_plugin.so) <TARGET> <LINK_FLAGS> <OBJECTS>"
+
+    # -D BUILD_SHARED_LIBS=ON
+    -D BUILD_SHARED_LIBS=OFF
+
+    ### COMPILERS AND FLAGS ###
+    -D CMAKE_CXX_FLAGS="${LTO_FLAG} -Wall -Wpedantic"
+    -D CMAKE_Fortran_FLAGS="${LTO_FLAG} -Wimplicit-procedure -Wimplicit-interface -Wall -std=f2003"
+    -D CMAKE_EXE_LINKER_FLAGS="${LTO_FLAG}"
+
+    ### TPLs ###
+    -D SWIG_EXECUTABLE="$SWIG_DIR/swig"
+    -D SWIG_DIR="$SWIG_DIR/Lib"
+    )
+
+
+# cmake -GNinja "${ARGS[@]}" $EXTRA_ARGS ../../ | tee configure.log
+cmake "${ARGS[@]}" $EXTRA_ARGS ../ | tee configure.log
+exit_status=$?
+
+if [ $exit_status -eq 0 ]; then
+    # Record environment for future
+    [[ -f build.env    ]] && mv build.env    build.env.old
+    [[ -f build.module ]] && mv build.module build.module.old
+    env          > build.env
+    module list &> build.module
+fi
