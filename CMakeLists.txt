@@ -55,7 +55,6 @@ macro(swig_fortran_add_library name)
   )
 
   # Use correct Fortran module directories
-  message(STATUS "binary dir: ${CMAKE_CURRENT_BINARY_DIR}")
   target_include_directories(${name}
       PUBLIC
           $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
