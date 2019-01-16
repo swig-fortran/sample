@@ -1,5 +1,5 @@
 !-----------------------------------------------------------------------------!
-! \file   common/shuffle_test.f90
+! \file   common/test_shuffle.f90
 ! \author Seth R Johnson
 ! \date   Tue Oct 10 11:58:17 2017
 ! \brief  shuffle test
@@ -36,5 +36,5 @@ end subroutine
 end program
 
 !-----------------------------------------------------------------------------!
-! end of common/shuffle_test.f90
+! end of common/test_shuffle.f90
 !-----------------------------------------------------------------------------!
