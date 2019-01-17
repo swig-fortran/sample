@@ -40,6 +40,7 @@ macro(swig_fortran_add_library name)
   swig_add_library(${name}
     LANGUAGE Fortran
     TYPE USE_BUILD_SHARED_LIBS
+    OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/generated
     SOURCES src/${name}.i ${ARGN})
 
   # Enable C++11
