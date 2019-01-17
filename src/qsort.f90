@@ -11,9 +11,6 @@ IMPLICIT NONE
 integer n
 REAL(C_DOUBLE), DIMENSION (n), INTENT(IN OUT)  :: list
 
-! Local variable
-INTEGER :: i
-
 CALL quick_sort_1(1, SIZE(list))
 
 CONTAINS
@@ -23,7 +20,7 @@ RECURSIVE SUBROUTINE quick_sort_1(left_end, right_end)
 INTEGER, INTENT(IN) :: left_end, right_end
 
 !     Local variables
-INTEGER             :: i, j, itemp
+INTEGER             :: i, j
 REAL(C_DOUBLE)                :: reference, temp
 INTEGER, PARAMETER  :: max_simple_sort_size = 6
 
@@ -72,7 +69,7 @@ SUBROUTINE interchange_sort(left_end, right_end)
 INTEGER, INTENT(IN) :: left_end, right_end
 
 !     Local variables
-INTEGER             :: i, j, itemp
+INTEGER             :: i, j
 REAL(C_DOUBLE)                :: temp
 
 DO i = left_end, right_end - 1
